@@ -1,0 +1,52 @@
+// Time Complexity : O(n^2)
+// O(n^2) : sort the array and O(n) to count distincts
+// Space Complexity : O(1)
+#include<stdio.h>
+
+// we use a sorted array to count distincts
+// again, decision to count happens 
+// at the last occurrence in sorted array
+int countDistinct(int arr[], int n){
+    
+    // Traverse the sorted array
+    // arr = {5, 5, 7, 8, 8, 10}
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+ 
+        // Move the index ahead whenever
+        // you encounter duplicates
+        while (i < n - 1 && arr[i] == arr[i + 1])
+            i++;
+ 
+        count++;
+    }
+ 
+    return count;
+}
+
+// using bubble sort to sort the array
+// you can use a better sorting algorithm to reduce 
+// time complexity to O(n log n) to sort
+int bubbleSort(int arr[], int size){
+    for (int i = 0; i < size-1; i++){       
+
+    // Since, after each iteration righmost i elements are sorted   
+    for (int j = 0; j < size-i-1; j++) if (arr[j] > arr[j+1]) 
+        {
+            int temp = arr[j]; // swap the element
+            arr[j] = arr[j+1]; 
+            arr[j+1] = temp; 
+        }
+    }
+}
+int main()
+{
+    int arr[] = {5, 8, 5, 7, 8, 10};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    
+    bubbleSort(arr, size);
+
+    printf("Distict items: %d",countDistinct(arr, size));
+    
+    return 0;
+}
