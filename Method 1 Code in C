@@ -1,0 +1,35 @@
+// Time Complexity : O(N^2)
+// Space Complexity : O(N)
+
+#include<stdio.h>
+#include<stdlib.h>
+
+// Main function to run the program
+int main() 
+{ 
+    int arr[] = {30, 50, 30, 10, 20, 40, 10, 20}; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+
+    int visited[n] = {0};// marking all items 0(unvisited)
+    int count_dis=0;
+    
+    for(int i=0; i < n; i++)
+    {
+        // only if unvisited
+        if(visited[i]==0)
+        {
+            for(int j = i+1; j < n; j++){
+                // if item appears again in the array
+                if(arr[i] == arr[j]){
+                    // mark visited
+                    visited[j] = 1;
+                }
+            }
+            // increase count as current array item counted
+            // and future indexes with same value marked visited
+            count_dis++;
+        }
+    }
+   printf("Distinct items : %d ",count_dis);
+   return 0; 
+}
