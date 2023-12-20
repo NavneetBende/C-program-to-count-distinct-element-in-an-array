@@ -1,0 +1,36 @@
+// Time Complexity : O(n^2)
+// Space Complexity : O(1)
+#include<stdio.h>
+
+int countDistinct(int *array, int size){
+    int count = 0;
+    
+    // Increase count only at last occurrence of item in array
+    for (int i = 0; i < size; i++){
+        
+        int j = 0;
+        // traverse rightwards
+        for (j = i+1; j < size; j++)
+        {   
+            // if found duplicated found rightwards in the array
+            if (array[i] == array[j]){
+                break;
+            }
+        }
+        // if traversed till the end of the array no break happenned
+        //  thus, this must have been last occurrence of arr[i]
+        if (j == size)
+            count++;
+    }
+    return count;
+}
+
+int main()
+{
+    int arr[] = {5, 8, 5, 7, 8, 10};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    
+    printf("Distinct items: %d",countDistinct(arr, size));
+    
+    return 0;
+}
